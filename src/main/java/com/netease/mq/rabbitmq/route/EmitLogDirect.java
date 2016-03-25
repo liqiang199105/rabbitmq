@@ -1,8 +1,8 @@
 package com.netease.mq.rabbitmq.route;
 
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
 import java.util.Arrays;
 
@@ -11,7 +11,6 @@ public class EmitLogDirect {
     private static final String EXCHANGE_NAME = "direct_logs";
 
     public static void main(String[] argv) throws Exception {
-
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         Connection connection = factory.newConnection();
@@ -20,7 +19,7 @@ public class EmitLogDirect {
         channel.exchangeDeclare(EXCHANGE_NAME, "direct");
 
         if (argv.length < 1){
-            argv = (String[]) Arrays.asList("info", "warning", "error").toArray();
+            argv = (String[]) Arrays.asList("warning", "error").toArray();
         }
         String severity = getSeverity(argv);
         String message = getMessage(argv);
