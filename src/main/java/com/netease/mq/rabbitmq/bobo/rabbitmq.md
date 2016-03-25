@@ -1,9 +1,9 @@
-BoBo RabbitMQ
+##BoBo RabbitMQ
 
-## rabbitmq 使用场景一 ：广播推送
-## 配置文件：liveshow/conf-online/h0[0-12].config.[0-12].xml
+### rabbitmq 使用场景一 ：广播推送
+### 配置文件：liveshow/conf-online/h0[0-12].config.[0-12].xml
 
-## Consumer: HostServer
+### Consumer: HostServer
 ```
 com.netease.liveshow.hostserver.HostServer.java  // main入口
     ExecutorService ayncService = Executors.newFixedThreadPool(3);
@@ -23,7 +23,7 @@ String queueName = channel.queueDeclare().getQueue();
 channel.queueBind(queueName, exchange, hostServerName); //routingkey
 ```
 
-## Producer: CentralServer
+### Producer: CentralServer
 ```
 com.netease.liveshow.centralserver.ctrl.MessageDispatchController.java // Http API入口
 com.netease.liveshow.centralserver.service.DefaultMessageDispatchService.java
