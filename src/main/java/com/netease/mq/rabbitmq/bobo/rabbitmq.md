@@ -4,7 +4,7 @@ BoBo RabbitMQ
 ## 配置文件：liveshow/conf-online/h0[0-12].config.[0-12].xml
 
 ## Consumer: HostServer
-
+```
 com.netease.liveshow.hostserver.HostServer.java  // main入口
     ExecutorService ayncService = Executors.newFixedThreadPool(3);
     ayncService.execute(new Runnable() {
@@ -14,16 +14,17 @@ com.netease.liveshow.hostserver.HostServer.java  // main入口
 			listener.start();
 		}
 	});
-
+```
 由于MQ是采取堵塞式的方式启动，所以需要用异步线程来启动他们
+```
 import com.netease.liveshow.hostserver.mq.RabbitMQListener.java
 channel.exchangeDeclare(exchange, "direct");
 String queueName = channel.queueDeclare().getQueue();
 channel.queueBind(queueName, exchange, hostServerName); //routingkey
-
+```
 
 ## Producer: CentralServer
-
+```
 com.netease.liveshow.centralserver.ctrl.MessageDispatchController.java // Http API入口
 com.netease.liveshow.centralserver.service.DefaultMessageDispatchService.java
 public void dispatch(OnlineBoardcastMessage message) {
@@ -47,7 +48,6 @@ public void dispatch(OnlineBoardcastMessage message) {
 			}
 		}
 	}
-
-
+```
 #### 参考 : [RabbitMq Management Online](http://123.58.176.106:15672/#/exchanges/%2F/liveshow-route-exchange)
 		
